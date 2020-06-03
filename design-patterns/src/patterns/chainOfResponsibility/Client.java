@@ -22,6 +22,7 @@ public class Client {
         fuXiaoZhang.setApprover(xiaoZhang);
         xiaoZhang.setApprover(xi);
 
+
         xi.processRequest(purchaseRequest);
 
 

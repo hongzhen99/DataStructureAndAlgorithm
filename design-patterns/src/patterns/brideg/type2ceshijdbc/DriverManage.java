@@ -9,6 +9,7 @@ import patterns.brideg.type2ceshijdbc.sql.Driver;
  * @Date: 2020/5/16 0:30
  */
 public class DriverManage {
+
     public static void  registerDriver(Driver driver){
         System.out.println("已注册");
     }
