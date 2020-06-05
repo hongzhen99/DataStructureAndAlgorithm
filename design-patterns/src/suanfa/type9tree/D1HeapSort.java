@@ -33,7 +33,7 @@ public class D1HeapSort {
 //
 //        bigHeap(arr,0,arr.length);
 //        System.out.println(Arrays.toString(arr));
-        //将整个数组 排成 大顶堆
+        //将整个数组 排成 大顶堆  //arr.length/2 -1最多非叶子节点个数
         for (int i = arr.length/2 -1 ;i>=0 ; i--){
             bigHeap(arr,i,arr.length);
         }

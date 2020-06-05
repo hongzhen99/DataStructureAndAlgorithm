@@ -11,7 +11,7 @@ import java.lang.reflect.Proxy;
  * @Date: 2020/5/22 14:11
  */
 public class ProxyFactory {
-    //传入要代理的对象
+    //传入要代理的对象  接口
     private Object target;
 
     public ProxyFactory(Object target){

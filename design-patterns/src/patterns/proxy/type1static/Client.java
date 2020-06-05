@@ -13,7 +13,5 @@ public class Client {
 
         TeacherProxy teacherProxy = new TeacherProxy(teacher);
         teacherProxy.teach();
-
-
     }
 }
