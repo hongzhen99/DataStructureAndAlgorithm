@@ -1,4 +1,4 @@
-package suanfa.type2.queue;
+package suanfa.type2duilie.queue;
 
 import java.util.Scanner;
 

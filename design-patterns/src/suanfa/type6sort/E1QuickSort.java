@@ -36,7 +36,8 @@ public class E1QuickSort {
         if(low >= high){
             return;
         }
-        center = arr[low];//已第一个数位准  作为基数 /3  0  4
+        //已第一个数位准  作为基数 /3  0  4
+        center = arr[low];
         left = low;
         right = high;
         //当 left 不小于 right 时 说明找到中间 基数所在的下标

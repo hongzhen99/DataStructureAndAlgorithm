@@ -36,6 +36,7 @@ public class BHaFuManCoding2 {
 //        System.out.println("成功");
 
     }
+
     /**
      * @param srcFile 文件路径
      * @param dstFile 压缩后路径
@@ -46,7 +47,7 @@ public class BHaFuManCoding2 {
         //创建输出流
         OutputStream os = null;
         ObjectOutputStream oos = null;
-        try{
+        try {
             is = new FileInputStream(srcFile);
             //is.available() 获取字节大小
             byte[] b = new byte[is.available()];
@@ -81,6 +82,7 @@ public class BHaFuManCoding2 {
             }
         }
     }
+
     /**
      * @param zipFile 文件路径
      * @param dstFile 解压后路径
@@ -91,13 +93,13 @@ public class BHaFuManCoding2 {
         ObjectInputStream ois = null;
         //创建输出流
         OutputStream os = null;
-        try{
+        try {
             is = new FileInputStream(zipFile);
             ois = new ObjectInputStream(is);
             //读取 哈夫曼编码后的字节数组
             byte[] huffmanBytes = (byte[]) ois.readObject();
             //读取 哈夫曼编码
-            Map<Byte,String> huffmanCodes = (Map<Byte,String>)ois.readObject();
+            Map<Byte, String> huffmanCodes = (Map<Byte, String>) ois.readObject();
             //解压
             byte[] bytes = deCode(huffmanCodes, huffmanBytes);
             //输出流
@@ -126,6 +128,7 @@ public class BHaFuManCoding2 {
 
     /**
      * //封装方法方便调用
+     *
      * @param contentBytes 传入一个对象的字节数组
      * @return 返回一个压缩后的字节数组
      */
@@ -171,9 +174,9 @@ public class BHaFuManCoding2 {
     }
 
 
-
     /**
      * //创建哈夫曼树
+     *
      * @param nodes
      * @return
      */
@@ -286,33 +289,31 @@ public class BHaFuManCoding2 {
     //转化为二进制得字符串 "10101000101111111100..." 然后在 ===> 对照哈夫曼编码 ===> "i like like ...   "
 
     /**
-     *
      * @param huffmanCodes 哈夫曼编码表
      * @param huffmanBytes 哈夫曼编码得到的字节数组
-     * @return
-     * 二进制得字符串 "10101000101111111100..." 然后在 ===> 对照哈夫曼编码 ===> "i like like ...   "
+     * @return 二进制得字符串 "10101000101111111100..." 然后在 ===> 对照哈夫曼编码 ===> "i like like ...   "
      */
-    private static byte[] deCode(Map<Byte,String> huffmanCodes, byte[] huffmanBytes) {
+    private static byte[] deCode(Map<Byte, String> huffmanCodes, byte[] huffmanBytes) {
         //用于拼接二进制字符串
         StringBuilder stringBuilder = new StringBuilder();
         //循环 huffmanBytes
         for (int i = 0; i < huffmanBytes.length; i++) {
-            boolean flag = (i == huffmanBytes.length -1);
+            boolean flag = (i == huffmanBytes.length - 1);
             //调用 字节 转 二进制字符串得方法 返回一个二进制字符串
             stringBuilder.append(byteToString(!flag, huffmanBytes[i]));
         }
         //1010100010111111110010001011111111001000101111111100100101001101110001110000011011101000111100101000101111111100110001001010011011100
         //吧哈夫曼编码表进行反转 因为反向查询 如 a -> 100 , 100 -> a
-        Map<String,Byte> map = new HashMap<>();
+        Map<String, Byte> map = new HashMap<>();
         //遍历哈夫曼编码
-        for (Map.Entry<Byte,String> mapping : huffmanCodes.entrySet()){
+        for (Map.Entry<Byte, String> mapping : huffmanCodes.entrySet()) {
             //反转 装进 map中
             map.put(mapping.getValue(), mapping.getKey());
         }
         //创建一个集合 存放byte 10101000101111111100100010111111......
         List<Byte> list = new ArrayList<>();
         //循环上面得到的 二进制字符串 stringBuilder
-        for (int i = 0; i < stringBuilder.length();) {
+        for (int i = 0; i < stringBuilder.length(); ) {
             //第二个索引 用于截取和定位
             int count = 1;
             //标识
@@ -322,7 +323,7 @@ public class BHaFuManCoding2 {
             //循环 知道找到一个 二进制字符串 对应的字节
             while (flag) {
                 //截取从第 i 个到 第 i + count 个
-                String key = stringBuilder.substring(i, i+count);
+                String key = stringBuilder.substring(i, i + count);
                 // 看看反转后的哈夫曼编码中是否存在 key
                 b = map.get(key);
                 //如果不存在 就 吧count 向右移动一个单位
@@ -347,31 +348,33 @@ public class BHaFuManCoding2 {
         //返回字节数组
         return bytes;
     }
+
     /**
      * 将一个byte 装成一个二进制的字符串
-     * @param b 传入得byte
+     *
+     * @param b    传入得byte
      * @param flag 标志是否需要补高位 如果是 true则需要补高位 如果是 false表示不补
      * @return 该 b对应得二进制得字符串
      */
-    private static String byteToString(boolean flag, byte b){
+    private static String byteToString(boolean flag, byte b) {
         int temp = b;
-        if (flag){
+        if (flag) {
             //如果是一个整数 就补高位
             temp |= 256;
         }
         //二进制补码
         String str = Integer.toBinaryString(temp);
         if (flag) {
-            return str.substring(str.length()-8);
+            return str.substring(str.length() - 8);
         } else {
             return str;
         }
     }
 
 
-
     /**
      * //前序遍历
+     *
      * @param root 根节点
      */
     public void preOrder(Node1 root) {
@@ -383,7 +386,7 @@ public class BHaFuManCoding2 {
     }
 }
 
-class Node1 implements Comparable<Node1>{
+class Node1 implements Comparable<Node1> {
     Byte data;
     int weight;
     Node1 left;
@@ -407,12 +410,12 @@ class Node1 implements Comparable<Node1>{
         return this.weight - o.weight;
     }
 
-    public void preOrder(){
+    public void preOrder() {
         System.out.println(this);
-        if (left != null){
+        if (left != null) {
             left.preOrder();
         }
-        if (right != null){
+        if (right != null) {
             right.preOrder();
         }
     }

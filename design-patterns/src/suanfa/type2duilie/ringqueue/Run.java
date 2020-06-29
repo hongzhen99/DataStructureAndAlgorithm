@@ -1,4 +1,4 @@
-package suanfa.type2.ringqueue;
+package suanfa.type2duilie.ringqueue;
 
 
 import java.util.Scanner;

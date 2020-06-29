@@ -20,8 +20,9 @@ public class C1HuangJinFenGe {
         int[] f = new int [maxSize];
         f[0] = 1;
         f[1] = 1;
-        for (int i = 2 ; i<f.length;i++)
+        for (int i = 2 ; i<f.length;i++) {
             f[i] = f[i-1] + f[i-2];
+        }
         return f;
     }
     public static int fibSearch(int[] arr ,int key){
